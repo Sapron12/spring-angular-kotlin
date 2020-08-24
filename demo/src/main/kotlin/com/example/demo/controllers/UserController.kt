@@ -4,6 +4,7 @@ import com.example.demo.entities.User
 import com.example.demo.repositories.UserRepository
 import com.example.demo.services.UserService
 import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -24,5 +25,8 @@ class UserController(val userService: UserService) {
 
     @GetMapping("{name}")
     fun getUserByName(@PathVariable("name") name: String): List<User>? = userService.getByName(name)
+
+    @DeleteMapping("delete/{id}")
+    fun deleteUser(@PathVariable("id") id: Long) = userService.delete(id)
 
 }
