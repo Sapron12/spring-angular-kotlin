@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../services/user.service";
+import {Form} from "../../entities/Form";
 
 @Component({
   selector: 'app-form-page',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPageComponent implements OnInit {
 
-  constructor() { }
+  form: Form
+
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  addForm(): void {
+
   }
 
 }

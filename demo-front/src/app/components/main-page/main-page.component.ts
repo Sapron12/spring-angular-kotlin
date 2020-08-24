@@ -9,7 +9,7 @@ import {User} from "../../entities/User";
 })
 export class MainPageComponent implements OnInit {
 
-  users: User[];
+  users: User[]
 
   constructor(private userService: UserService) { }
 
