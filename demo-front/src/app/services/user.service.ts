@@ -18,7 +18,7 @@ export class UserService {
   }
 
   public getAll() {
-    return this.httpClient.get<User[]>(this.USER_PART.concat + this.ALL)
+    return this.httpClient.get<User[]>(this.USER_PART + this.ALL)
   }
 
   public delete(user) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(val userRepository: UserRepository) {
 
-    fun all(): List<User> = userRepository.findAll()
+    fun all(): List<User>? = userRepository.findAll()
 
     fun add(user: User) = userRepository.save(user)
 
