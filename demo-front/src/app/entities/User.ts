@@ -1,6 +1,8 @@
 export class User {
-  id: number;
-  name: string;
-  password: string;
-  phone: string;
+  public id: number;
+  public username: string;
+  public password: string;
+  public phone: string;
+  public enabled: boolean;
+  public authorities: string[]
 }

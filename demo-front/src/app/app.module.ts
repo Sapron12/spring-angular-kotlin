@@ -7,8 +7,9 @@ import {LoginPageComponent} from './components/login-page/login-page.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {RegistrationPageComponent} from './components/registration-page/registration-page.component';
 import {FormPageComponent} from './components/form-page/form-page.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import {AuthenticationService} from "./services/authentication.service";
 
 
 @NgModule({
@@ -25,7 +26,11 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthenticationService, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

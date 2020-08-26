@@ -1,4 +1,4 @@
-<table class="table table-bordered shadows">
+<table class="table table-bordered shadows" *ngIf="authService.isUserLoggedIn()">
   <thead>
   <tr>
     <th scope="col">#</th>
@@ -10,10 +10,9 @@
   <tbody>
   <tr *ngFor="let user of users">
     <th>{{user.id}}</th>
-    <td>{{user.name}}</td>
+    <td>{{user.username}}</td>
     <td>{{user.password}}</td>
     <td>{{user.phone}}</td>
   </tr>
   </tbody>
 </table>
-<h1></h1>

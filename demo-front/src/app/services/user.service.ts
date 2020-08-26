@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from "../entities/User";
 
 @Injectable({
@@ -9,7 +9,7 @@ export class UserService {
 
   private USER_PART = 'http://localhost:8080/user/'
   private ALL = "all"
-  private ADD = "add"
+  private ADD = "registration"
   private DELETE = "delete/"
 
   constructor(
@@ -26,6 +26,6 @@ export class UserService {
   }
 
   public add(user) {
-    return this.httpClient.post<User>(this.USER_PART + this.ADD, user);
+    return this.httpClient.post<Boolean>(this.USER_PART + this.ADD, user)
   }
 }
