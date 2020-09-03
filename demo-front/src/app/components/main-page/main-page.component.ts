@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {User} from "../../entities/User";
-import {AuthenticationService} from "../../services/authentication.service";
-import {Observable} from "rxjs";
-import {async} from "rxjs/internal/scheduler/async";
+import {UserService} from '../../services/user/user.service';
+import {User} from '../../entities/User';
+import {AuthenticationService} from '../../services/authentication/authentication.service';
+import {Observable} from 'rxjs';
+import {async} from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-main-page',
@@ -12,7 +12,8 @@ import {async} from "rxjs/internal/scheduler/async";
 })
 export class MainPageComponent implements OnInit {
 
-  users: User[]
+  users: User[];
+  displayedColumns: string[] = ['id', 'username', 'password', 'phone'];
 
   constructor(private userService: UserService, public authService: AuthenticationService) {
   }
@@ -21,10 +22,10 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAll().subscribe(
       response => this.handleSuccessfulResponse(response)
-    )
+    );
   }
 
-  handleSuccessfulResponse(response) {
+  handleSuccessfulResponse(response): void {
     this.users = response;
   }
 

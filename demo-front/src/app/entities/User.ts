@@ -4,5 +4,5 @@ export class User {
   public password: string;
   public phone: string;
   public enabled: boolean;
-  public authorities: string[]
+  public authorities: string[];
 }

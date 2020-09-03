@@ -1,38 +1,72 @@
-<div class="col shadows p-3">
-  <div class="form-group row">
-    <label for="example-text-input" class="col-3
-     col-form-label">Name</label>
-    <div class="col-9">
-      <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+<div class="block-centre">
+  <mat-card style="width: 50%; margin-top: 2rem">
+    <div [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="top-blocks">
+        <div class="field-block">
+          <mat-form-field class="form-field">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+        </div>
+        <div class="field-block">
+          <mat-form-field class="form-field">
+            <mat-label>Patronymic</mat-label>
+            <input matInput formControlName="patronymic">
+          </mat-form-field>
+        </div>
+        <div class="field-block">
+          <mat-form-field class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="top-blocks">
+        <div class="field-block">
+          <mat-form-field class="form-field">
+            <mat-label>Phone number</mat-label>
+            <input id="11" type="tel" [textMask]="mask"
+                   (ng2TelOutput)="log($event)"
+                   (countryChange)="countryChange($event)"
+                   (submit)="log($event)"
+                   [(ngModel)]="num"
+                   matInput
+                   ng2TelInput
+                   [ng2TelInputOptions]="{initialCountry: 'us', preferredCountries: ['us', 'be']}"
+                   formControlName="phone"/>
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <input matInput [ngxMatDatetimePicker]="picker" formControlName="datetime" placeholder="Choose a date"
+                 [disabled]="disabled">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                                   [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                                   [touchUi]="touchUi" [enableMeridian]="enableMeridian"
+                                   [disableMinute]="false" [hideTime]="false">
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+      <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Drop files into this bordered area
+        </ng-template>
+      </ngx-file-drop>
+      <br>
+      <table *ngIf="allFiles.length > 0" style="margin: 0 auto; width: 70%" class="mat-table">
+        <tr>
+          <th style="margin-left: 20px">Name</th>
+          <th style="margin-left: 20px">Size</th>
+        </tr>
+        <tr *ngFor="let file of allFiles">
+          <td style="margin-right: 50px">{{file.relativePath}}</td>
+          <td>{{(file.size / 1024).toFixed(1) }}<b style="margin-left: 6px">kByte</b></td>
+        </tr>
+      </table>
+      <mat-button-toggle class="block-centre" (click)="onSubmit()">Submit</mat-button-toggle>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-tel-input" class="col-3
-     col-form-label">Telephone</label>
-    <div class="col-9">
-      <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="exampleFormControlTextarea1" class="col-3
-     col-form-label">Text</label>
-    <div class="col-9">
-      <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="example-datetime-local-input" class="col-3
-     col-form-label">Date and time</label>
-    <div class="col-9">
-      <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="exampleFormControlFile1" class="col-3 col-form-label">Example file input</label>
-    <div class="col-9">
-      <input type="file" class="form-control-file" id="exampleFormControlFile1">
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary submit">Submit</button>
+  </mat-card>
 </div>
+
 

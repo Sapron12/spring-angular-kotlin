@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {User} from "../entities/User";
+import {User} from "../../entities/User";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
@@ -25,6 +25,9 @@ export class AuthenticationService implements HttpInterceptor {
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('basicauth', 'Basic ' + btoa(username + ':' + password))
         this.router.navigate(["/"])
+      },
+      error => {
+        console.log(error)
       }
     );
 
@@ -51,14 +54,16 @@ export class AuthenticationService implements HttpInterceptor {
 
   logOut() {
     this.httpClient.get('http://localhost:8080/user/logout').subscribe(data => {
-      sessionStorage.removeItem('username')
-      sessionStorage.removeItem('basicauth')
-      this.router.navigate([''])
-    })
+        sessionStorage.removeItem('username')
+        sessionStorage.removeItem('basicauth')
+        this.router.navigate([''])
+      },
+      error => {
+        console.log(error)
+      })
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("INTERCEPT")
     if (sessionStorage.getItem('username') && sessionStorage.getItem('basicauth')) {
       req = req.clone({
         setHeaders: {

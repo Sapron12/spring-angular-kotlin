@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../../services/authentication.service";
-import {Router} from "@angular/router";
+import {AuthenticationService} from '../../services/authentication/authentication.service';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login-page',
@@ -9,13 +10,15 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit {
 
-  public username: String = "";
-  public password: String = "";
-  public invalidLogin = false
+  public username = '';
+  public password = '';
+  public invalidLogin = false;
+  public hide = true;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -23,9 +26,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   public signIn(): void {
-
-    this.authenticationService.authenticate(this.username, this.password)
-
+    this.authenticationService.authenticate(this.username, this.password);
+    this.dialog.closeAll();
   }
 
 

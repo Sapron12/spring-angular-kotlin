@@ -6,15 +6,14 @@ import {RegistrationPageComponent} from './components/registration-page/registra
 import {FormPageComponent} from './components/form-page/form-page.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginPageComponent},
-  { path: '', component: MainPageComponent},
-  { path: 'registration', component: RegistrationPageComponent},
-  { path: 'form', component: FormPageComponent}
+  {path: 'login', component: LoginPageComponent},
+  {path: '', component: MainPageComponent},
+  {path: 'registration', component: RegistrationPageComponent},
+  {path: 'form', component: FormPageComponent},
 ];
 
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

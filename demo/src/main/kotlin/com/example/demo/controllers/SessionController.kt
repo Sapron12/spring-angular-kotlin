@@ -15,5 +15,4 @@ class SessionController(val userService: UserService) {
 
     @GetMapping("/current-user")
     fun getUser(): User? = userService.getByName(SecurityContextHolder.getContext().authentication.name)
-
 }

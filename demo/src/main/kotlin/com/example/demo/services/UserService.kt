@@ -25,6 +25,4 @@ class UserService(val userRepository: UserRepository) {
     fun getByName(name: String): User? = userRepository.findUserByUsername(name)
 
     fun delete(id: Long) = userRepository.deleteById(id)
-
-
 }

@@ -1,18 +1,40 @@
-<table class="table table-bordered shadows" *ngIf="authService.isUserLoggedIn()">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Password</th>
-    <th scope="col">Phone</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of users">
-    <th>{{user.id}}</th>
-    <td>{{user.username}}</td>
-    <td>{{user.password}}</td>
-    <td>{{user.phone}}</td>
-  </tr>
-  </tbody>
-</table>
+<!--<table class="table table-bordered shadows" *ngIf="authService.isUserLoggedIn()">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th scope="col">#</th>-->
+<!--    <th scope="col">Name</th>-->
+<!--    <th scope="col">Password</th>-->
+<!--    <th scope="col">Phone</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let user of users">-->
+<!--    <th>{{user.id}}</th>-->
+<!--    <td>{{user.username}}</td>-->
+<!--    <td>{{user.password}}</td>-->
+<!--    <td>{{user.phone}}</td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
+<div style="align-content: center;margin: 50px; justify-content: center" *ngIf="authService.isUserLoggedIn()">
+  <mat-table [dataSource]="users" class="mat-elevation-z8" style="width: 40%">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef> Username</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="password">
+      <mat-header-cell *matHeaderCellDef> Password</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

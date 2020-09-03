@@ -2,7 +2,38 @@
   box-shadow: 1px 1px 30px #e7e7ed
 }
 
+.table-form {
+  width: 100%;
+}
+
+.field-block {
+  align-self: center;
+
+}
+
+.top-blocks {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
 .block-centre {
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.sign-in-content {
+  height: 100%;
+  width: 20rem;
+  text-align: center;
 }
