@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {User} from "../../entities/User";
-import {Observable} from "rxjs";
-import {Router} from "@angular/router";
-import {map} from "rxjs/operators";
+import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {User} from '../../entities/User';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService implements HttpInterceptor {
 
-  private currentUser: User
+  private currentUser: User;
 
   constructor(
     private httpClient: HttpClient,
@@ -18,49 +17,50 @@ export class AuthenticationService implements HttpInterceptor {
   ) {
   }
 
-  authenticate(username, password) {
-    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
-    return this.httpClient.get<Boolean>('http://localhost:8080/user/validate', {headers}).subscribe(
+  authenticate(username, password): void {
+    const basic = 'Basic ' + btoa(username + ':' + password);
+    const headers = new HttpHeaders({Authorization: basic});
+    this.httpClient.get<boolean>('http://localhost:8080/user/validate', {headers}).subscribe(
       userData => {
         sessionStorage.setItem('username', username);
-        sessionStorage.setItem('basicauth', 'Basic ' + btoa(username + ':' + password))
-        this.router.navigate(["/"])
+        sessionStorage.setItem('basicauth', basic);
+        this.router.navigate(['/']);
       },
       error => {
-        console.log(error)
+        console.log(error);
       }
     );
 
   }
 
-  getCurrentUserFromBack() {
-    return this.httpClient.get<User>('http://localhost:8080/session/current-user')
+  getCurrentUserFromBack(): Observable<User> {
+    return this.httpClient.get<User>('http://localhost:8080/session/current-user');
   }
 
-  private getCurrentUserSubscribe() {
+  private getCurrentUserSubscribe(): void {
     this.getCurrentUserFromBack().subscribe(value => {
-      this.currentUser = value
-    })
+      this.currentUser = value;
+    });
   }
 
-  public getCurrentUser() {
-    return this.currentUser
+  public getCurrentUser(): any {
+    return this.currentUser;
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem('username')
-    return !(user === null)
+  isUserLoggedIn(): boolean {
+    const user = sessionStorage.getItem('username');
+    return !(user === null);
   }
 
-  logOut() {
+  logOut(): void {
     this.httpClient.get('http://localhost:8080/user/logout').subscribe(data => {
-        sessionStorage.removeItem('username')
-        sessionStorage.removeItem('basicauth')
-        this.router.navigate([''])
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('basicauth');
+        this.router.navigate(['']);
       },
       error => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -69,7 +69,7 @@ export class AuthenticationService implements HttpInterceptor {
         setHeaders: {
           Authorization: sessionStorage.getItem('basicauth')
         }
-      })
+      });
     }
     return next.handle(req);
   }

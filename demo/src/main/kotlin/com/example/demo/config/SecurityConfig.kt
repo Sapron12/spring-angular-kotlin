@@ -16,6 +16,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(val customUserDetailsService: CustomUserDetailsService) : WebSecurityConfigurerAdapter() {
+    private val USER_PATH: String = "/user/"
+    private val AUTORIZATION = "Authorization"
+
     @Override
     override fun configure(http: HttpSecurity?) {
         http!!.cors()
@@ -24,16 +27,16 @@ class SecurityConfig(val customUserDetailsService: CustomUserDetailsService) : W
                 .disable()
                 .authorizeRequests()
                 .requestMatchers().permitAll()
-                .antMatchers("/user/registration")
+                .antMatchers("${USER_PATH}registration")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/user/validate")
+                .loginPage("${USER_PATH}validate")
                 .and()
                 .logout()
-                .logoutUrl("/user/logout")
+                .logoutUrl("${USER_PATH}logout")
                 .and()
                 .httpBasic();
     }
@@ -49,8 +52,8 @@ class SecurityConfig(val customUserDetailsService: CustomUserDetailsService) : W
     fun corsConfigurationSource(): CorsConfigurationSource {
         val source: UrlBasedCorsConfigurationSource = UrlBasedCorsConfigurationSource()
         val config: CorsConfiguration = CorsConfiguration();
-        config.applyPermitDefaultValues().addAllowedHeader("Authorization")
-        config.addExposedHeader("Authorization")
+        config.applyPermitDefaultValues().addAllowedHeader(AUTORIZATION)
+        config.addExposedHeader(AUTORIZATION)
         config.addAllowedMethod("*")
         source.registerCorsConfiguration("/**", config)
         return source

@@ -17,7 +17,7 @@
 <!--  </tbody>-->
 <!--</table>-->
 <div style="align-content: center;margin: 50px; justify-content: center" *ngIf="authService.isUserLoggedIn()">
-  <mat-table [dataSource]="users" class="mat-elevation-z8" style="width: 40%">
+  <mat-table [dataSource]="users" class="mat-elevation-z8 user-table">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>

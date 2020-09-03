@@ -1,5 +1,6 @@
 package com.example.demo.entities
 
+import com.example.demo.entities.enums.Role
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.CollectionTable

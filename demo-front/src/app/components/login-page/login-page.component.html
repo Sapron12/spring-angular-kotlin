@@ -1,12 +1,12 @@
 <div class="example-container sign-in-content">
   <h1>Login</h1>
-  <mat-form-field appearance="fill" style="width: 100%">
+  <mat-form-field appearance="fill" class="width-100">
     <mat-label>Login</mat-label>
     <input [(ngModel)]="username" matInput [type]="'text'">
     <mat-icon matSuffix>account_circle</mat-icon>
   </mat-form-field>
   <br>
-  <mat-form-field appearance="fill" style="width: 100%">
+  <mat-form-field appearance="fill" class="width-100">
     <mat-label>Password</mat-label>
     <input [(ngModel)]="password" matInput [type]="hide ? 'password' : 'text'">
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"

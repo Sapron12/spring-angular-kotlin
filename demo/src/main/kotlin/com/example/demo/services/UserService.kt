@@ -1,11 +1,12 @@
 package com.example.demo.services
 
-import com.example.demo.entities.Role
+
 import com.example.demo.entities.User
+import com.example.demo.entities.enums.Role
 import com.example.demo.repositories.UserRepository
-import org.springframework.stereotype.Service
-import java.util.*
 import java.util.Collections.singleton
+import java.util.Optional.ofNullable
+import org.springframework.stereotype.Service
 
 @Service
 class UserService(val userRepository: UserRepository) {
@@ -13,7 +14,7 @@ class UserService(val userRepository: UserRepository) {
     fun all(): List<User>? = userRepository.findAll()
 
     fun add(user: User): Boolean {
-        return Optional.ofNullable(userRepository.findUserByUsername(user.username))
+        return ofNullable(userRepository.findUserByUsername(user.username))
                 .map { false }
                 .orElseGet {
                     user.setAuthorities(singleton(Role.USER))

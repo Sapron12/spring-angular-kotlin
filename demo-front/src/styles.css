@@ -2,6 +2,10 @@
   box-shadow: 1px 1px 30px #e7e7ed
 }
 
+.user-table {
+  width: 40%;
+}
+
 .table-form {
   width: 100%;
 }
@@ -9,6 +13,24 @@
 .field-block {
   align-self: center;
 
+}
+
+.margin-6px {
+  margin-left: 6px;
+}
+
+.form-card {
+  width: 50%;
+  margin-top: 2rem;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.file-table {
+  margin: 0 auto;
+  width: 70%;
 }
 
 .top-blocks {
